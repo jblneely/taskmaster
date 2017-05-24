@@ -32,6 +32,14 @@ angular.module('TaskCtrls', ['TaskServices'])
                 console.log(data);
             });
         };
+        ///fix this or it's just another delete button
+        $scope.completeTask = function(id, tasksIdx) {
+            Task.delete({ id: id }, function success(data) {
+                $scope.tasks.splice(tasksIdx, 1);
+            }, function error(data) {
+                console.log(data);
+            });
+        };
 
     }])
     .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
@@ -160,7 +168,7 @@ angular.module('TaskCtrls', ['TaskServices'])
         }
     });
 
-}])
+}]);
 
 // .controller("DoughnutCtrl", ['$scope', function($scope) {
 //                 var ctx = document.getElementById("myChart").getContext('2d');
@@ -178,41 +186,41 @@ angular.module('TaskCtrls', ['TaskServices'])
 //                     }
 //                 });
 
-task.forEach(function(task) {
-            ctx = document.getElementById("myChart").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["Current", "Goal"],
-                    datasets: [{
-                        backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)'
-                        ],
-                        data: [4, 7, 9.5, 10, 6]
-                            // data: [task.current, task.goal - task.current]
-                    }]
-                }
-            });
+// task.forEach(function(task) {
+//     ctx = document.getElementById("myChart").getContext('2d');
+//     var myChart = new Chart(ctx, {
+//         type: 'doughnut',
+//         data: {
+//             labels: ["Current", "Goal"],
+//             datasets: [{
+//                 backgroundColor: ['rgba(255, 99, 132, 0.2)',
+//                     'rgba(54, 162, 235, 0.2)'
+//                 ],
+//                 data: [4, 7, 9.5, 10, 6]
+//                     // data: [task.current, task.goal - task.current]
+//             }]
+//         }
+//     });
 
 
 
 
 
-    // tasks.forEach(function(task) {
-    //     ctx = document.getElementById("myChart" + task.id).getContext('2d');
-    //     var myDougnutChart = new Chart(ctx, {
-    //         type: 'doughnut',
-    //         data: {
-    //             labels: ["Current", "Goal"],
-    //             datasets: [{
-    //                 backgroundColor: [
-    //                     'rgba(255, 99, 132, 0.2)',
-    //                     'rgba(54, 162, 235, 0.2)'
-    //                 ],
-    //                 // data: [task.current, task.goal - task.current]
-    //                 data: [4, 7]
-    //             }]
-    //         }
-    //     });
-    // });
-});
+// tasks.forEach(function(task) {
+//     ctx = document.getElementById("myChart" + task.id).getContext('2d');
+//     var myDougnutChart = new Chart(ctx, {
+//         type: 'doughnut',
+//         data: {
+//             labels: ["Current", "Goal"],
+//             datasets: [{
+//                 backgroundColor: [
+//                     'rgba(255, 99, 132, 0.2)',
+//                     'rgba(54, 162, 235, 0.2)'
+//                 ],
+//                 // data: [task.current, task.goal - task.current]
+//                 data: [4, 7]
+//             }]
+//         }
+//     });
+// });
+// });

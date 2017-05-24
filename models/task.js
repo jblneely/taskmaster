@@ -5,6 +5,7 @@ var TaskSchema = mongoose.Schema({
     description: String,
     image: String,
     dueDate: Date,
-    completedDate: Date
+    completedDate: Date,
+    completed: Boolean
 });
 module.exports = mongoose.model('Task', TaskSchema);

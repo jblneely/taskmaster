@@ -5,5 +5,8 @@
     <p>
         {{task.description}}
     </p>
+    <p>
+        Due: {{task.dueDate | date}}
+    </p>
     <img class="img-responsive" ng-src="{{task.image}}">
 </div>
