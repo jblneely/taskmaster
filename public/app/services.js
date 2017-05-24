@@ -1,5 +1,5 @@
 angular.module('TaskServices', ['ngResource'])
-    .factory('Auth', 'Task', ['$resource', function($resource) {
+    .factory('Task', ['$resource', function($resource) {
         return $resource('/api/tasks/:id');
     }])
     .factory('Auth', ['$window', function($window) {
