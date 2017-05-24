@@ -113,30 +113,30 @@ angular.module('TaskCtrls', ['TaskServices'])
 }])
 
 .controller("LineCtrl", ['$scope', function($scope) {
-    var sleepDataFromDB = [{ hours: 5, date: '05/22/17' },
-        { hours: 8, date: '05/23/17' },
-        { hours: 11, date: '05/24/17' },
-        { hours: 7.75, date: '05/25/17' },
-        { hours: 5, date: '05/26/17' },
-        { hours: 6, date: '05/27/17' },
-        { hours: 8.5, date: '05/28/17' }
+    var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
+        { tasks: 8, date: '05/23/17' },
+        { tasks: 11, date: '05/24/17' },
+        { tasks: 7.75, date: '05/25/17' },
+        { tasks: 5, date: '05/26/17' },
+        { tasks: 6, date: '05/27/17' },
+        { tasks: 8.5, date: '05/28/17' }
     ];
     var labelArray = [];
-    var hoursArray = [];
-    sleepDataFromDB.forEach(function(dataPoint) {
+    var Array = [];
+    taskDataFromDB.forEach(function(dataPoint) {
         labelArray.push(dataPoint.date);
-        hoursArray.push(dataPoint.hours);
+        Array.push(dataPoint.tasks);
     });
 
-    var sleeps = [{
-        label: 'sleep',
+    var tasks = [{
+        label: 'task',
         data: [5, 8, 6, 9, 6, 10, 4],
         backgroundColor: [
             'rgba(54, 162, 235, 0.2)'
         ]
     }, {
         label: 'from database',
-        data: hoursArray,
+        data: Array,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)'
         ]
@@ -148,28 +148,43 @@ angular.module('TaskCtrls', ['TaskServices'])
         type: 'line',
         data: {
             labels: labelArray,
-            datasets: sleeps
+            datasets: tasks
         }
     });
 
 }])
 
-.controller("DoughnutCtrl", ['$scope', function($scope) {
-    var ctx = document.getElementById("myChart").getContext('2d');
+// .controller("DoughnutCtrl", ['$scope', function($scope) {
+//                 var ctx = document.getElementById("myChart").getContext('2d');
+//                 var myChart = new Chart(ctx, {
+//                     type: 'doughnut',
+//                     data: {
+//                         labels: ["M", "T", "W", "T", "F", "S", "S"],
+//                         datasets: [{
+//                             backgroundColor: [
+//                                 "#2ecc71",
+//                                 "#3498db",
+//                             ],
+//                             data: [12, 19]
+//                         }]
+//                     }
+//                 });
+
+task.forEach(function(task) {
+    ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
-            labels: ["M", "T", "W", "T", "F", "S", "S"],
+            labels: ["Current", "Goal"],
             datasets: [{
-                backgroundColor: [
-                    "#2ecc71",
-                    "#3498db",
+                backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
                 ],
-                data: [12, 19]
+                data: [4, 7, 9.5, 10, 6]
+                    // data: [task.current, task.goal - task.current]
             }]
         }
     });
-
 
 
 
@@ -191,4 +206,4 @@ angular.module('TaskCtrls', ['TaskServices'])
     //         }
     //     });
     // });
-}]);
+});
