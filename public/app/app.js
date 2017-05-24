@@ -10,6 +10,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     templateUrl: 'app/views/home.html',
                     controller: 'HomeCtrl'
                 })
+                .state('allTask', {
+                    url: '/tasks/',
+                    templateUrl: 'app/views/tasks.html',
+                    controller: 'ShowAllCtrl'
+                })
                 .state('newTask', {
                     url: '/tasks/new',
                     templateUrl: 'app/views/newTask.html',

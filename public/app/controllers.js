@@ -20,8 +20,17 @@ angular.module('TaskCtrls', ['TaskServices'])
     .controller('ShowCtrl', ['$scope', '$stateParams', 'Task', function($scope, $stateParams, Task) {
         $scope.task = {};
 
-        Taks.get({ id: $stateParams.id }, function success(data) {
+        Task.get({ id: $stateParams.id }, function success(data) {
             $scope.task = data;
+        }, function error(data) {
+            console.log(data);
+        });
+    }])
+    .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
+        $scope.tasks = [];
+
+        Task.query(function success(data) {
+            $scope.tasks = data;
         }, function error(data) {
             console.log(data);
         });
@@ -73,7 +82,7 @@ angular.module('TaskCtrls', ['TaskServices'])
         };
         var clearAlerts = function() {
             Alerts.clear();
-        }
+        };
 
         $scope.userLogin = function() {
             $http.post('/api/auth', $scope.user).then(function success(res) {
@@ -93,7 +102,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 .controller('AlertsController', ['$scope', 'Alerts', function($scope, Alerts) {
     $scope.alerts = function() {
         return Alerts.get();
-    }
+    };
 }])
 
 .controller("LineCtrl", ['$scope', function($scope) {

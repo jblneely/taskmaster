@@ -13,7 +13,7 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
-mongoose.connect('mongodb://localhost/authboilerplate'); //change authboilerplate to db name
+mongoose.connect('mongodb://localhost/taskmaster');
 
 // decode POST data in JSON and URL encoded formats
 app.use(bodyParser.json());
