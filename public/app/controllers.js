@@ -34,6 +34,13 @@ angular.module('TaskCtrls', ['TaskServices'])
         }, function error(data) {
             console.log(data);
         });
+        $scope.deleteTask = function(id, tasksIdx) {
+            Task.delete({ id: id }, function success(data) {
+                $scope.tasks.splice(tasksIdx, 1);
+            }, function error(data) {
+                console.log(data);
+            });
+        };
     }])
     .controller('NewCtrl', ['$scope', '$location', 'Task', function($scope, $location, Task) {
         $scope.task = {
