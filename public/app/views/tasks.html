@@ -5,7 +5,7 @@
     <input type="text" class="form-control" id="search" ng-model="search">
 </div>
 <div class="well" ng-repeat="task in tasks | filter:{title:search} track by task._id">
-    <h1>{{task.title}}</h1>
-    <a ng-href="/tasks/{{task._id}}">Permalink</a>
+    <a ng-href="/tasks/{{task._id}}"><h1>{{task.title}}</h1></a>
     <a ng-click="deleteTask(task._id, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
+    <br>
 </div>
