@@ -33,7 +33,7 @@ angular.module('TaskServices', ['ngResource'])
                 }
                 return false;
             }
-        }
+        };
     }])
     .factory('AuthInterceptor', ['Auth', function(Auth) {
         return {
@@ -44,7 +44,7 @@ angular.module('TaskServices', ['ngResource'])
                 }
                 return config;
             }
-        }
+        };
     }])
     .factory('Alerts', [function() {
         var alerts = [];
@@ -59,5 +59,5 @@ angular.module('TaskServices', ['ngResource'])
             clear: function() {
                 alerts = [];
             }
-        }
+        };
     }]);
