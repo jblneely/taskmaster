@@ -25,6 +25,14 @@ angular.module('TaskCtrls', ['TaskServices'])
         }, function error(data) {
             console.log(data);
         });
+        $scope.deleteTask = function(id, tasksIdx) {
+            Task.delete({ id: id }, function success(data) {
+                $scope.tasks.splice(tasksIdx, 1);
+            }, function error(data) {
+                console.log(data);
+            });
+        };
+
     }])
     .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
         $scope.tasks = [];
@@ -51,7 +59,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 
         $scope.createTask = function() {
             Task.save($scope.task, function success(data) {
-                $location.path('/');
+                $location.path('/tasks/');
             }, function error(data) {
                 console.log(data);
             });
