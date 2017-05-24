@@ -1,5 +1,5 @@
 <a href="/chart" class="btn btn-primary">&larr; Back</a>
-<a href="/" class="btn btn-primary">&larr; Completed Task</a>
+<a ng-click="completeTask(task._id, $index)" class="btn btn-primary">&larr; Completed Task</a>
 <h1>{{task.title}}</h1>
 <div class="well">
     <p>

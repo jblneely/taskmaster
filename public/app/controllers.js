@@ -179,20 +179,21 @@ angular.module('TaskCtrls', ['TaskServices'])
 //                 });
 
 task.forEach(function(task) {
-    ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Current", "Goal"],
-            datasets: [{
-                backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                data: [4, 7, 9.5, 10, 6]
-                    // data: [task.current, task.goal - task.current]
-            }]
-        }
-    });
+            ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Current", "Goal"],
+                    datasets: [{
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        data: [4, 7, 9.5, 10, 6]
+                            // data: [task.current, task.goal - task.current]
+                    }]
+                }
+            });
+
 
 
 
