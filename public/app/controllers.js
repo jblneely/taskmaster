@@ -32,6 +32,14 @@ angular.module('TaskCtrls', ['TaskServices'])
                 console.log(data);
             });
         };
+        ///fix this or it's just another delete button
+        $scope.completeTask = function(id, tasksIdx) {
+            Task.delete({ id: id }, function success(data) {
+                $scope.tasks.splice(tasksIdx, 1);
+            }, function error(data) {
+                console.log(data);
+            });
+        };
 
     }])
     .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
@@ -161,6 +169,7 @@ angular.module('TaskCtrls', ['TaskServices'])
     });
 
 
+
     var ctx2 = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx2, {
         type: 'doughnut',
@@ -178,3 +187,4 @@ angular.module('TaskCtrls', ['TaskServices'])
 
 
 }]);
+
