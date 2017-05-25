@@ -35,8 +35,9 @@ angular.module('TaskCtrls', ['TaskServices'])
         };
 
     }])
-    .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
+    .controller('ShowAllCtrl', ['$scope', 'Task', '$location', 'Auth', function($scope, Task, $location, Auth) {
         $scope.tasks = [];
+        var user = Auth.currentUser();
 
         Task.query(function success(data) {
             $scope.tasks = data;
@@ -46,10 +47,9 @@ angular.module('TaskCtrls', ['TaskServices'])
 
         $scope.completedTask = function(id, tasksIdx) {
             console.log('checking completed on task db');
-            Task.put({ id: id }, function(task) {
-                console.log('inside update cb')
-                task.completed = true;
-                task.save;
+            Task.put({ id: id, userId: user.id }, function(task) {
+                console.log('success?', task);
+                $location.path('/chart');
             }, function error(data) {
                 console.log(data);
             });
