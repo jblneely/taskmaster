@@ -6,6 +6,7 @@
 </div>
 <div class="well" ng-repeat="task in tasks | filter:{title:search} track by task._id">
     <a ng-href="/tasks/{{task._id}}"><h1>{{task.title}}</h1></a>
-    <a ng-click="deleteTask(task._id, $index)" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a>
+    <a ng-click="completedTask(task._id, $index)" class="btn btn-success glyphicon glyphicon-ok pull-right"></a>
+    <a ng-click="deleteTask(task._id, $index)" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
     <br>
 </div>

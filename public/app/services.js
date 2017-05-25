@@ -1,6 +1,8 @@
 angular.module('TaskServices', ['ngResource'])
     .factory('Task', ['$resource', function($resource) {
-        return $resource('/api/tasks/:id');
+        return $resource('/api/tasks/:id', null, {
+            'put': { method: 'PUT' }
+        });
     }])
     .factory('Auth', ['$window', function($window) {
         return {

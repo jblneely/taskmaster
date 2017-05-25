@@ -12,8 +12,8 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    completedTask: String,
-    currentTask: String
+    completedTask: [String],
+    currentTask: [String]
 });
 
 UserSchema.set('toJSON', {

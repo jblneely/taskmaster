@@ -16,6 +16,7 @@ angular.module('TaskCtrls', ['TaskServices'])
                 console.log(data);
             });
         };
+
     }])
     .controller('ShowCtrl', ['$scope', '$stateParams', 'Task', function($scope, $stateParams, Task) {
         $scope.task = {};
@@ -32,14 +33,6 @@ angular.module('TaskCtrls', ['TaskServices'])
                 console.log(data);
             });
         };
-        ///fix this or it's just another delete button
-        $scope.completeTask = function(id, tasksIdx) {
-            Task.delete({ id: id }, function success(data) {
-                $scope.tasks.splice(tasksIdx, 1);
-            }, function error(data) {
-                console.log(data);
-            });
-        };
 
     }])
     .controller('ShowAllCtrl', ['$scope', 'Task', function($scope, Task) {
@@ -50,6 +43,18 @@ angular.module('TaskCtrls', ['TaskServices'])
         }, function error(data) {
             console.log(data);
         });
+
+        $scope.completedTask = function(id, tasksIdx) {
+            console.log('checking completed on task db');
+            Task.put({ id: id }, function(task) {
+                console.log('inside update cb')
+                task.completed = true;
+                task.save;
+            }, function error(data) {
+                console.log(data);
+            });
+        };
+
         $scope.deleteTask = function(id, tasksIdx) {
             Task.delete({ id: id }, function success(data) {
                 $scope.tasks.splice(tasksIdx, 1);
@@ -167,7 +172,12 @@ angular.module('TaskCtrls', ['TaskServices'])
             datasets: tasks
         }
     });
+    // var count = [{{task.complete}} {
+    //   if task.complete [count ++];
+    //   var roots = count.map(function(x){
 
+    //   });
+    // }];
 
 
     var ctx2 = document.getElementById("myChart").getContext('2d');
@@ -179,7 +189,7 @@ angular.module('TaskCtrls', ['TaskServices'])
                 backgroundColor: ['rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)'
                 ],
-                data: [4, 7, 9.5, 10, 6]
+                data: [4, 7, 9.5]
                     // data: [task.current, task.goal - task.current]
             }]
         }
@@ -187,4 +197,3 @@ angular.module('TaskCtrls', ['TaskServices'])
 
 
 }]);
-
