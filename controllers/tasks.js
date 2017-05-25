@@ -25,7 +25,7 @@ router.route('/')
             if (err) return res.status(500).send(err);
             //User table add taskId to completed
 
-            console.log('user is is', req.body.userId);
+            console.log('user is', req.body.userId);
             User.findByIdAndUpdate(req.body.userId, { $push: { completedTask: req.body.id } },
                 function(err, user) {
                     if (err) {

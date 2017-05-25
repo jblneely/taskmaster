@@ -195,5 +195,34 @@ angular.module('TaskCtrls', ['TaskServices'])
         }
     });
 
+    //pseudocode for date
+
+    var days = [getPreviousDay(0), getPreviousDay(1), getPreviousDay(2), getPreviousDay(3), getPreviousDay(4), getPreviousDay(5)]
+    var dataset = [];
+
+
+    function fetch(date, callback) {
+        Task.find({ dueDate: date }, function(returnedTasks) {
+            dataset.push(returnedTasks);
+            callback();
+        });
+    }
+
+    function getPreviousDay(int) {
+        var year = new Date().getFullYear()
+        var month = new Date().getMonth()
+        var day = new Date().getDate()
+        return new Date(year, month, day - int)
+    }
+
+
+    async.concat(days, fetch, function() {
+        console.log('finished', dataset);
+    });
+
+
+
+
+
 
 }]);
