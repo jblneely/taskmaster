@@ -160,7 +160,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 
     var ctx = document.getElementById("line").getContext('2d');
 
-    var myChart = new Chart(ctx, {
+    var line = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labelArray,
@@ -168,59 +168,23 @@ angular.module('TaskCtrls', ['TaskServices'])
         }
     });
 
+
+
+    var ctx2 = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ["Current", "Goal"],
+            datasets: [{
+                backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                data: [4, 7, 9.5, 10, 6]
+                    // data: [task.current, task.goal - task.current]
+            }]
+        }
+    });
+
+
 }]);
 
-// .controller("DoughnutCtrl", ['$scope', function($scope) {
-//                 var ctx = document.getElementById("myChart").getContext('2d');
-//                 var myChart = new Chart(ctx, {
-//                     type: 'doughnut',
-//                     data: {
-//                         labels: ["M", "T", "W", "T", "F", "S", "S"],
-//                         datasets: [{
-//                             backgroundColor: [
-//                                 "#2ecc71",
-//                                 "#3498db",
-//                             ],
-//                             data: [12, 19]
-//                         }]
-//                     }
-//                 });
-
-// task.forEach(function(task) {
-//     ctx = document.getElementById("myChart").getContext('2d');
-//     var myChart = new Chart(ctx, {
-//         type: 'doughnut',
-//         data: {
-//             labels: ["Current", "Goal"],
-//             datasets: [{
-//                 backgroundColor: ['rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)'
-//                 ],
-//                 data: [4, 7, 9.5, 10, 6]
-//                     // data: [task.current, task.goal - task.current]
-//             }]
-//         }
-//     });
-
-
-
-
-
-// tasks.forEach(function(task) {
-//     ctx = document.getElementById("myChart" + task.id).getContext('2d');
-//     var myDougnutChart = new Chart(ctx, {
-//         type: 'doughnut',
-//         data: {
-//             labels: ["Current", "Goal"],
-//             datasets: [{
-//                 backgroundColor: [
-//                     'rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)'
-//                 ],
-//                 // data: [task.current, task.goal - task.current]
-//                 data: [4, 7]
-//             }]
-//         }
-//     });
-// });
-// });
