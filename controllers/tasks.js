@@ -53,4 +53,13 @@ router.route('/:id')
         });
     });
 
+router.route('/chart')
+    .get(function(req, res) {
+        Task.find(function(err, tasks) {
+            if (err) return res.status(500).send(err);
+            return res.send(tasks);
+        }).populate('user');
+
+    });
+
 module.exports = router;
