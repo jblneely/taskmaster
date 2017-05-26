@@ -183,6 +183,7 @@ angular.module('TaskCtrls', ['TaskServices'])
         console.log('error', res);
     });
 
+
 }]);
 
 function formatDate(dateToFormat) {
