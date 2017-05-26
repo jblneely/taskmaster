@@ -40,7 +40,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     templateUrl: 'app/views/404.html'
                 })
                 .state('chart', {
-                    url: '/chart',
+                    url: '/chart/:id',
                     templateUrl: 'app/views/chart.html',
                     controller: 'LineCtrl'
                 });
