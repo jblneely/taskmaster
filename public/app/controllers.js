@@ -48,10 +48,10 @@ angular.module('TaskCtrls', ['TaskServices'])
         $scope.completedTask = function(id, tasksIdx) {
             console.log('checking completed on task db');
             Task.put({ id: id, userId: user.id }, function(task) {
-                console.log('success?', task);
-                $location.path('/chart');
+                // console.log('line 51 controllers, completed task');
+                $location.path('/chart/' + user.id);
             }, function error(data) {
-                console.log(data);
+                console.log("error", data);
             });
         };
 
@@ -79,9 +79,11 @@ angular.module('TaskCtrls', ['TaskServices'])
         };
     }])
     .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
+        $scope.user = Auth.currentUser();
+
         $scope.isLoggedIn = function() {
             return Auth.isLoggedIn();
-        }
+        };
 
         $scope.logout = function() {
             Auth.removeToken();
@@ -133,67 +135,60 @@ angular.module('TaskCtrls', ['TaskServices'])
     };
 }])
 
-.controller("LineCtrl", ['$scope', function($scope) {
-    var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
-        { tasks: 8, date: '05/23/17' },
-        { tasks: 11, date: '05/24/17' },
-        { tasks: 7.75, date: '05/25/17' },
-        { tasks: 5, date: '05/26/17' },
-        { tasks: 6, date: '05/27/17' },
-        { tasks: 8.5, date: '05/28/17' }
-    ];
-    var labelArray = [];
-    var Array = [];
-    taskDataFromDB.forEach(function(dataPoint) {
-        labelArray.push(dataPoint.date);
-        Array.push(dataPoint.tasks);
+.controller("LineCtrl", ['$scope', 'Auth', 'Task', '$http', '$stateParams', function($scope, Auth, Task, $http, $stateParams) {
+    $http.get('/api/tasks/usertasks/' + $stateParams.id).then(function success(res) {
+        console.log('okay', res.data.user);
+        //Stuff goes here
+        //for loop to create taskDataFromDB object
+        // var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
+        //     { tasks: 8, date: '05/23/17' },
+        //     { tasks: 11, date: '05/24/17' },
+        //     { tasks: 7.75, date: '05/25/17' },
+        //     { tasks: 5, date: '05/26/17' },
+        //     { tasks: 6, date: '05/27/17' },
+        //     { tasks: 8.5, date: '05/28/17' }
+        // ];
+        console.log('in the line controller');
+        var dateArray = [];
+        var numberArray = [];
+        res.data.user.completedTask.forEach(function(dataPoint) {
+            dateArray.push(formatDate(new Date(Date.parse(dataPoint.completedDate))));
+            numberArray.push(dataPoint.title);
+        });
+
+        var tasks = [{
+            label: 'task',
+            data: [5, 8, 6, 9, 6, 10, 4],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)'
+            ]
+        }, {
+            label: 'from database',
+            data: numberArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ]
+        }];
+
+        var ctx = document.getElementById("line").getContext('2d');
+
+        var line = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dateArray,
+                datasets: tasks
+            }
+        });
+    }, function err(res) {
+        console.log('error', res);
     });
-
-    var tasks = [{
-        label: 'task',
-        data: [5, 8, 6, 9, 6, 10, 4],
-        backgroundColor: [
-            'rgba(54, 162, 235, 0.2)'
-        ]
-    }, {
-        label: 'from database',
-        data: Array,
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
-        ]
-    }];
-
-    var ctx = document.getElementById("line").getContext('2d');
-
-    var line = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labelArray,
-            datasets: tasks
-        }
-    });
-    // var count = [{{task.complete}} {
-    //   if task.complete [count ++];
-    //   var roots = count.map(function(x){
-
-    //   });
-    // }];
-
-
-    var ctx2 = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx2, {
-        type: 'doughnut',
-        data: {
-            labels: ["Current", "Goal"],
-            datasets: [{
-                backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                data: [4, 7, 9.5]
-                    // data: [task.current, task.goal - task.current]
-            }]
-        }
-    });
-
 
 }]);
+
+function formatDate(dateToFormat) {
+    console.log('type of completed date', typeof dateToFormat);
+    var dd = dateToFormat.getDate();
+    var mm = dateToFormat.getMonth() + 1; //January is 0!
+    var yyyy = dateToFormat.getFullYear();
+    return mm + '/' + dd + '/' + yyyy;
+}
