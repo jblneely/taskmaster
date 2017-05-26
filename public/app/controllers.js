@@ -133,7 +133,14 @@ angular.module('TaskCtrls', ['TaskServices'])
     };
 }])
 
-.controller("LineCtrl", ['$scope', function($scope) {
+.controller("LineCtrl", ['$scope', '$http', 'Task', 'Auth', function($scope, $http, Task, Auth) {
+    $http.get('/charts', $scope.data).then(function success(data) {
+        console.log(data);
+    });
+
+
+
+
     var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
         { tasks: 8, date: '05/23/17' },
         { tasks: 11, date: '05/24/17' },
@@ -197,28 +204,28 @@ angular.module('TaskCtrls', ['TaskServices'])
 
     //pseudocode for date
 
-    var days = [getPreviousDay(0), getPreviousDay(1), getPreviousDay(2), getPreviousDay(3), getPreviousDay(4), getPreviousDay(5)]
-    var dataset = [];
+    // var days = [getPreviousDay(0), getPreviousDay(1), getPreviousDay(2), getPreviousDay(3), getPreviousDay(4), getPreviousDay(5)]
+    // var dataset = [];
 
 
-    function fetch(date, callback) {
-        Task.find({ dueDate: date }, function(returnedTasks) {
-            dataset.push(returnedTasks);
-            callback();
-        });
-    }
+    // function fetch(date, callback) {
+    //     Task.find({ dueDate: date }, function(returnedTasks) {
+    //         dataset.push(returnedTasks);
+    //         callback();
+    //     });
+    // }
 
-    function getPreviousDay(int) {
-        var year = new Date().getFullYear()
-        var month = new Date().getMonth()
-        var day = new Date().getDate()
-        return new Date(year, month, day - int)
-    }
+    // function getPreviousDay(int) {
+    //     var year = new Date().getFullYear()
+    //     var month = new Date().getMonth()
+    //     var day = new Date().getDate()
+    //     return new Date(year, month, day - int)
+    // }
 
 
-    async.concat(days, fetch, function() {
-        console.log('finished', dataset);
-    });
+    // async.concat(days, fetch, function() {
+    //     console.log('finished', dataset);
+    // });
 
 
 
