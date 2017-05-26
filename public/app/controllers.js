@@ -149,24 +149,38 @@ angular.module('TaskCtrls', ['TaskServices'])
         //     { tasks: 8.5, date: '05/28/17' }
         // ];
         console.log('in the line controller');
+        var taskObj = {};
+        var baselineArray = [];
         var dateArray = [];
         var numberArray = [];
         res.data.user.completedTask.forEach(function(dataPoint) {
-            dateArray.push(formatDate(new Date(Date.parse(dataPoint.completedDate))));
-            numberArray.push(dataPoint.title);
+            var strDate = formatDate(new Date(dataPoint.completedDate)).toString();
+            if(taskObj[strDate]){
+              taskObj[strDate] += 1;
+            }
+            else{
+              taskObj[strDate] = 1;
+              baselineArray.push(10);
+            }
         });
+        console.log(taskObj);
+
+        for(var key in taskObj) {
+            dateArray.push(formatDate(new Date(Date.parse(key))));
+            numberArray.push(taskObj[key]);
+        }
 
         var tasks = [{
-            label: 'task',
-            data: [5, 8, 6, 9, 6, 10, 4],
+            label: 'Baseline',
+            data: baselineArray,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)'
             ]
-        }, {
-            label: 'from database',
+        },{
+            label: 'Tasks Completed',
             data: numberArray,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(255, 99, 132, 0.6)'
             ]
         }];
 
@@ -179,10 +193,25 @@ angular.module('TaskCtrls', ['TaskServices'])
                 datasets: tasks
             }
         });
+
+        //Doughnut Chart
+
+        var ctx2 = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ["Current", "Goal"],
+                datasets: [{
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    data: [numberArray[numberArray.length - 1], 10 - numberArray[numberArray.length - 1]]
+                }]
+            }
+        });
     }, function err(res) {
         console.log('error', res);
     });
-
 }]);
 
 function formatDate(dateToFormat) {
