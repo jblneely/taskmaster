@@ -47,9 +47,9 @@ angular.module('TaskCtrls', ['TaskServices'])
 
         $scope.completedTask = function(id, tasksIdx) {
             console.log('checking completed on task db');
-            Task.put({ id: id, userId: user._id }, function(task) {
+            Task.put({ id: id, userId: user.id }, function(task) {
                 // console.log('line 51 controllers, completed task');
-                $location.path('/chart');
+                $location.path('/chart/' + user.id);
             }, function error(data) {
                 console.log("error", data);
             });
@@ -182,7 +182,6 @@ angular.module('TaskCtrls', ['TaskServices'])
     }, function err(res) {
         console.log('error', res);
     });
-
 
 }]);
 
