@@ -25,7 +25,7 @@ router.route('/')
             if (err) return res.status(500).send(err);
             //User table add taskId to completed
 
-            console.log('user is', req.body.userId);
+            // console.log('user is', req.body.userId);
             User.findByIdAndUpdate(req.body.userId, { $push: { completedTask: req.body.id } },
                 function(err, user) {
                     if (err) {
@@ -53,13 +53,20 @@ router.route('/:id')
         });
     });
 
-router.route('/chart')
-    .get(function(req, res) {
-        Task.find(function(err, tasks) {
-            if (err) return res.status(500).send(err);
-            return res.send(tasks);
-        }).populate('user');
 
-    });
+router.get('/usertasks/:id', function(req, res) {
+    console.log('in /usertasks/:id', 'ID is', req.params.id);
+    User.findOne({ _id: req.params.id })
+        .populate('completedTask')
+        .exec(function(err, user) {
+            console.log('user with populated tasks:', user);
+            res.send({ user: user });
+        })
+        .catch(function(err) {
+            console.log('something wrong', err);
+            res.send({ error: err });
+        });
+});
+
 
 module.exports = router;
