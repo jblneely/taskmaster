@@ -7,10 +7,18 @@ body {
   background-color: black;
 }
 .doughnut-container {
-  display: inline-block;
-  width: 30em;
-  height: 30em;
+  width: 40%;
 }
 .container {
   display: flex-wrap;
 }
+
+.task {
+  width: 60%;
+}
+
+.btn {
+  margin: .1em;
+}
+
+
