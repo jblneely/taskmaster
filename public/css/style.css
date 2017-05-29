@@ -1,24 +1,91 @@
+
+body {
+  color: white;
+  body {
+  margin: 0;
+  padding: 0;
+/*  Background fallback in case of IE8 & down, or in case video doens't load, such as with slower connections  */
+  background: black;
+  background-attachment: fixed;
+  background-size: cover;
+}
+}
+h1 {
+  text-align: center;
+  color: white;
+}
+h2 {
+  text-align: center;
+}
+h3 {
+  text-align: center;
+  color: white;
+}
 .container {
-    width: 80%;
+    display: flex-wrap;
+    width: 100%;
     margin: 15px auto;
 }
-body {
-  color: blue;
-  background-color: black;
+.row {
+    width: 100%;
+    height: auto;
+    margin: 15px auto;
+    border-color: aqua;
+  align-items: center;
+  justify-content: center;
 }
-.doughnut-container {
-  width: 40%;
+.btn-success {
+   background-color: transparent;
+   color: white;
+   border-color: white;
 }
-.container {
-  display: flex-wrap;
+.btn-success:hover {
+ background-color: navy;
+ color: aqua;
 }
-
-.task {
-  width: 60%;
+.btn-danger {
+  background-color: transparent;
+  color: red;
 }
-
+.well {
+  color: navy;
+}
+.well h1 {
+ color: white;
+}
+.well h1:hover {
+  color: aqua;
+  text-decoration: none;
+}
 .btn {
-  margin: .1em;
+  margin: .1em, .1em, .1em, .1em;
 }
+#task-card {
+background-color: rgba(0, 0, 0, 0.5);
+margin: 10px;
+}
+#task-card:hover {
+ background-color: rgba(0, 0, 0, 0.9);
+ border-color:  white;
+ text-decoration-style: none;
+}
+#chart-div {
+  display: inline-block;
+  width: 100%;
+
+}
+#video-background {
+/*  this makes the video fullscreen  */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+}
+
+
 
 

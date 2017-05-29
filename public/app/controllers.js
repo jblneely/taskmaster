@@ -174,13 +174,13 @@ angular.module('TaskCtrls', ['TaskServices'])
             label: 'Baseline',
             data: baselineArray,
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(255,255,255, 0.4)'
             ]
         },{
             label: 'Tasks Completed',
             data: numberArray,
             backgroundColor: [
-                'rgba(127, 255, 0, 0.7)'
+                'rgba(0, 255, 255, 1)'
             ]
         }];
 
@@ -202,8 +202,8 @@ angular.module('TaskCtrls', ['TaskServices'])
             data: {
                 labels: ["Current", "Goal"],
                 datasets: [{
-                    backgroundColor: ['rgba(127, 255, 0, 0.7)',
-                        'rgba(54, 162, 235, 0.2)'
+                    backgroundColor: ['rgba(0, 255, 255, 1)',
+                        'rgba(255,255, 255, 0.4)'
                     ],
                     data: [numberArray[numberArray.length - 1], 10 - numberArray[numberArray.length - 1]]
                 }]
