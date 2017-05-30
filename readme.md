@@ -17,5 +17,7 @@ USER STORIES:
 2. A team working to complete a series of tasks on a project.
 
 Taskminder is hosted on HEROKU.
+![screen shot 2017-05-30 at 10 03 35 am](https://cloud.githubusercontent.com/assets/26267926/26595191/6a0c32b4-451f-11e7-8c34-c32ab267c441.png)
+
 
 You will need to install an .ENV file with JWT_SECRET.
