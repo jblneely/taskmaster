@@ -221,3 +221,4 @@ function formatDate(dateToFormat) {
     var yyyy = dateToFormat.getFullYear();
     return mm + '/' + dd + '/' + yyyy;
 }
+
